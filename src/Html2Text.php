@@ -342,7 +342,7 @@ class Html2Text
         $this->convertPre($text);
         $text = preg_replace($this->search, $this->replace, $text);
         $text = preg_replace_callback($this->callbackSearch, array($this, 'pregCallback'), $text);
-        $text = strip_tags($text);
+        $text = preg_replace('/(<(\/|!)?\w+[^>]*>)|(<!--.*?-->)/s', '', $text);
         $text = preg_replace($this->entSearch, $this->entReplace, $text);
         $text = html_entity_decode($text, ENT_QUOTES, self::ENCODING);
 
